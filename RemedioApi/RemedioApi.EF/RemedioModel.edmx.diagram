@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="241a09478cf74cd6b756860f748979c6" Name="Diagram1">
+        <EntityTypeShape EntityType="RemedioModel.tb_FcmToken" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemedioModel.tb_Leitura" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemedioModel.tb_CaixaRemedio" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="RemedioModel.tb_Paciente" Width="1.5" PointX="0.75" PointY="4.625" />
+        <AssociationConnector Association="RemedioModel.FK__tb_CaixaR__Pacie__4BAC3F29" />
+        <AssociationConnector Association="RemedioModel.FK__tb_Leitur__Pacie__4CA06362" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

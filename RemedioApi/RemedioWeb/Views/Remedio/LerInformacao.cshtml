@@ -1,0 +1,40 @@
+﻿@model RemedioWeb.Models.LeituraContainer
+@{
+    ViewBag.Title = "Ler";
+}
+
+<div class="container mt-5">
+    <table class="table table-bordered table-hover">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col" class="align-middle text-light">ID</th>
+                <th scope="col" class="align-middle text-light">Dia da Semana</th>
+                <th scope="col" class="align-middle text-light">Data Informada</th>
+                <th scope="col" class="align-middle text-light">Paciente</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var leitura in Model.Leituras)
+            {
+                <tr>
+                    <td>
+                        @leitura.LeituraId
+                    </td>
+                    <td>
+                        @leitura.GetDiaDaSemana
+                    </td>
+                    <td>
+                        @leitura.DataInformada
+                    </td>
+                    <td>
+                        @leitura.Paciente
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+

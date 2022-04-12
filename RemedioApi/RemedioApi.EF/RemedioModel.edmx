@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RemedioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_CaixaRemedio">
+          <Key>
+            <PropertyRef Name="CaixaRemedioId" />
+          </Key>
+          <Property Name="CaixaRemedioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Domingo" Type="bit" Nullable="false" />
+          <Property Name="Segunda" Type="bit" Nullable="false" />
+          <Property Name="Terca" Type="bit" Nullable="false" />
+          <Property Name="Quarta" Type="bit" Nullable="false" />
+          <Property Name="Quinta" Type="bit" Nullable="false" />
+          <Property Name="Sexta" Type="bit" Nullable="false" />
+          <Property Name="Sabado" Type="bit" Nullable="false" />
+          <Property Name="PacienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_FcmToken">
+          <Key>
+            <PropertyRef Name="FcmTokenId" />
+          </Key>
+          <Property Name="FcmTokenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FcmToken" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Leitura">
+          <Key>
+            <PropertyRef Name="LeituraId" />
+          </Key>
+          <Property Name="LeituraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiaDaSemana" Type="int" Nullable="false" />
+          <Property Name="DataInformada" Type="datetime" Nullable="false" />
+          <Property Name="PacienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Paciente">
+          <Key>
+            <PropertyRef Name="PacienteId" />
+          </Key>
+          <Property Name="PacienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PacienteNome" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_CaixaR__Pacie__4BAC3F29">
+          <End Role="tb_Paciente" Type="Self.tb_Paciente" Multiplicity="1" />
+          <End Role="tb_CaixaRemedio" Type="Self.tb_CaixaRemedio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Paciente">
+              <PropertyRef Name="PacienteId" />
+            </Principal>
+            <Dependent Role="tb_CaixaRemedio">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Leitur__Pacie__4CA06362">
+          <End Role="tb_Paciente" Type="Self.tb_Paciente" Multiplicity="1" />
+          <End Role="tb_Leitura" Type="Self.tb_Leitura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Paciente">
+              <PropertyRef Name="PacienteId" />
+            </Principal>
+            <Dependent Role="tb_Leitura">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RemedioModelStoreContainer">
+          <EntitySet Name="tb_CaixaRemedio" EntityType="Self.tb_CaixaRemedio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_FcmToken" EntityType="Self.tb_FcmToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Leitura" EntityType="Self.tb_Leitura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Paciente" EntityType="Self.tb_Paciente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_CaixaR__Pacie__4BAC3F29" Association="Self.FK__tb_CaixaR__Pacie__4BAC3F29">
+            <End Role="tb_Paciente" EntitySet="tb_Paciente" />
+            <End Role="tb_CaixaRemedio" EntitySet="tb_CaixaRemedio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Leitur__Pacie__4CA06362" Association="Self.FK__tb_Leitur__Pacie__4CA06362">
+            <End Role="tb_Paciente" EntitySet="tb_Paciente" />
+            <End Role="tb_Leitura" EntitySet="tb_Leitura" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RemedioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_FcmToken">
+          <Key>
+            <PropertyRef Name="FcmTokenId" />
+          </Key>
+          <Property Name="FcmTokenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FcmToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Leitura">
+          <Key>
+            <PropertyRef Name="LeituraId" />
+          </Key>
+          <Property Name="LeituraId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiaDaSemana" Type="Int32" Nullable="false" />
+          <Property Name="DataInformada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PacienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Paciente" Relationship="RemedioModel.FK__tb_Leitur__Pacie__4CA06362" FromRole="tb_Leitura" ToRole="tb_Paciente" />
+        </EntityType>
+        <EntityContainer Name="RemedioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_FcmToken" EntityType="Self.tb_FcmToken" />
+          <EntitySet Name="tb_Leitura" EntityType="Self.tb_Leitura" />
+          <EntitySet Name="tb_CaixaRemedio" EntityType="RemedioModel.tb_CaixaRemedio" />
+          <EntitySet Name="tb_Paciente" EntityType="RemedioModel.tb_Paciente" />
+          <AssociationSet Name="FK__tb_CaixaR__Pacie__4BAC3F29" Association="RemedioModel.FK__tb_CaixaR__Pacie__4BAC3F29">
+            <End Role="tb_Paciente" EntitySet="tb_Paciente" />
+            <End Role="tb_CaixaRemedio" EntitySet="tb_CaixaRemedio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Leitur__Pacie__4CA06362" Association="RemedioModel.FK__tb_Leitur__Pacie__4CA06362">
+            <End Role="tb_Paciente" EntitySet="tb_Paciente" />
+            <End Role="tb_Leitura" EntitySet="tb_Leitura" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tb_CaixaRemedio">
+          <Key>
+            <PropertyRef Name="CaixaRemedioId" />
+          </Key>
+          <Property Name="CaixaRemedioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Domingo" Type="Boolean" Nullable="false" />
+          <Property Name="Segunda" Type="Boolean" Nullable="false" />
+          <Property Name="Terca" Type="Boolean" Nullable="false" />
+          <Property Name="Quarta" Type="Boolean" Nullable="false" />
+          <Property Name="Quinta" Type="Boolean" Nullable="false" />
+          <Property Name="Sexta" Type="Boolean" Nullable="false" />
+          <Property Name="Sabado" Type="Boolean" Nullable="false" />
+          <Property Name="PacienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Paciente" Relationship="RemedioModel.FK__tb_CaixaR__Pacie__4BAC3F29" FromRole="tb_CaixaRemedio" ToRole="tb_Paciente" />
+        </EntityType>
+        <EntityType Name="tb_Paciente">
+          <Key>
+            <PropertyRef Name="PacienteId" />
+          </Key>
+          <Property Name="PacienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PacienteNome" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_CaixaRemedio" Relationship="RemedioModel.FK__tb_CaixaR__Pacie__4BAC3F29" FromRole="tb_Paciente" ToRole="tb_CaixaRemedio" />
+          <NavigationProperty Name="tb_Leitura" Relationship="RemedioModel.FK__tb_Leitur__Pacie__4CA06362" FromRole="tb_Paciente" ToRole="tb_Leitura" />
+        </EntityType>
+        <Association Name="FK__tb_CaixaR__Pacie__4BAC3F29">
+          <End Type="RemedioModel.tb_Paciente" Role="tb_Paciente" Multiplicity="1" />
+          <End Type="RemedioModel.tb_CaixaRemedio" Role="tb_CaixaRemedio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Paciente">
+              <PropertyRef Name="PacienteId" />
+            </Principal>
+            <Dependent Role="tb_CaixaRemedio">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Leitur__Pacie__4CA06362">
+          <End Type="RemedioModel.tb_Paciente" Role="tb_Paciente" Multiplicity="1" />
+          <End Type="RemedioModel.tb_Leitura" Role="tb_Leitura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Paciente">
+              <PropertyRef Name="PacienteId" />
+            </Principal>
+            <Dependent Role="tb_Leitura">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RemedioModelStoreContainer" CdmEntityContainer="RemedioEntities">
+          <EntitySetMapping Name="tb_FcmToken">
+            <EntityTypeMapping TypeName="RemedioModel.tb_FcmToken">
+              <MappingFragment StoreEntitySet="tb_FcmToken">
+                <ScalarProperty Name="FcmTokenId" ColumnName="FcmTokenId" />
+                <ScalarProperty Name="FcmToken" ColumnName="FcmToken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Leitura">
+            <EntityTypeMapping TypeName="RemedioModel.tb_Leitura">
+              <MappingFragment StoreEntitySet="tb_Leitura">
+                <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+                <ScalarProperty Name="LeituraId" ColumnName="LeituraId" />
+                <ScalarProperty Name="DiaDaSemana" ColumnName="DiaDaSemana" />
+                <ScalarProperty Name="DataInformada" ColumnName="DataInformada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_CaixaRemedio">
+            <EntityTypeMapping TypeName="RemedioModel.tb_CaixaRemedio">
+              <MappingFragment StoreEntitySet="tb_CaixaRemedio">
+                <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+                <ScalarProperty Name="Sabado" ColumnName="Sabado" />
+                <ScalarProperty Name="Sexta" ColumnName="Sexta" />
+                <ScalarProperty Name="Quinta" ColumnName="Quinta" />
+                <ScalarProperty Name="Quarta" ColumnName="Quarta" />
+                <ScalarProperty Name="Terca" ColumnName="Terca" />
+                <ScalarProperty Name="Segunda" ColumnName="Segunda" />
+                <ScalarProperty Name="Domingo" ColumnName="Domingo" />
+                <ScalarProperty Name="CaixaRemedioId" ColumnName="CaixaRemedioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Paciente">
+            <EntityTypeMapping TypeName="RemedioModel.tb_Paciente">
+              <MappingFragment StoreEntitySet="tb_Paciente">
+                <ScalarProperty Name="PacienteNome" ColumnName="PacienteNome" />
+                <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
